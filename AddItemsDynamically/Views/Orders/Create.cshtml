@@ -11,7 +11,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" id="form">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
@@ -24,9 +24,17 @@
                         <input asp-for="IsUrgent" /> @Html.DisplayNameFor(model => model.IsUrgent)
                     </label>
                 </div>
-            </div>            
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+            <div id="orderItemsContainer">
+                @Html.EditorFor(model => model.Items)
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <input class="btn btn-default" type="button" id="btnAdd" value="Add product" />
+                </div>
+                <div class="col-md-2">
+                    <input type="submit" value="Create" id="submit" class="btn btn-default" />
+                </div>
             </div>
         </form>
     </div>
@@ -38,4 +46,18 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script type="text/javascript">
+        $("#btnAdd").on('click', function () {
+            $.ajax({
+                async: true,
+                data: $('#form').serialize(),
+                type: "POST",
+                url: '/Orders/AddOrderItem',
+                success: function (partialView) {
+                    console.log("partialView: "+partialView);
+                    $('#orderItemsContainer').html(partialView);
+                }
+            });
+        });
+    </script>
 }

@@ -2,6 +2,7 @@
 using AddItemsDynamically.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -43,7 +44,9 @@ namespace AddItemsDynamically.Controllers
         // GET: Orders/Create
         public IActionResult Create()
         {
-            return View();
+            var model = new Order();
+            model.Items.Add(new OrderItem());
+            return View(model);
         }
 
         // POST: Orders/Create
@@ -51,15 +54,24 @@ namespace AddItemsDynamically.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,IsUrgent,Created")] Order order)
+        public async Task<IActionResult> Create([Bind("Name,IsUrgent,Items")] Order order)
         {
             if (ModelState.IsValid)
             {
+                order.Created = DateTime.UtcNow;
                 _context.Add(order);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             return View(order);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> AddOrderItem([Bind("Items")] Order order)
+        {
+            order.Items.Add(new OrderItem());
+            return PartialView("OrderItems", order);
         }
 
         // GET: Orders/Edit/5

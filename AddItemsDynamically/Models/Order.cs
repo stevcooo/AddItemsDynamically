@@ -10,5 +10,10 @@ namespace AddItemsDynamically.Models
         public bool IsUrgent { get; set; }
         public List<OrderItem> Items { get; set; }
         public DateTime Created { get; set; }
+
+        public Order()
+        {
+            Items = new List<OrderItem>();
+        }
     }
 }

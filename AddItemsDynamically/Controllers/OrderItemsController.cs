@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using AddItemsDynamically.Data;
+using AddItemsDynamically.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using AddItemsDynamically.Data;
-using AddItemsDynamically.Models;
 
 namespace AddItemsDynamically.Controllers
 {

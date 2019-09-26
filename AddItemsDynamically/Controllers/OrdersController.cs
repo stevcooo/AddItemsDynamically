@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using AddItemsDynamically.Data;
+using AddItemsDynamically.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using AddItemsDynamically.Data;
-using AddItemsDynamically.Models;
 
 namespace AddItemsDynamically.Controllers
 {
@@ -54,7 +51,7 @@ namespace AddItemsDynamically.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Created")] Order order)
+        public async Task<IActionResult> Create([Bind("Id,Name,IsUrgent,Created")] Order order)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +83,7 @@ namespace AddItemsDynamically.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Created")] Order order)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,IsUrgent,Created")] Order order)
         {
             if (id != order.Id)
             {

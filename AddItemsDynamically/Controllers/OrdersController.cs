@@ -20,7 +20,7 @@ namespace AddItemsDynamically.Controllers
         // GET: Orders
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Order.ToListAsync());
+            return View(await _context.Order.Include(t=>t.Items).ToListAsync());
         }
 
         // GET: Orders/Details/5
@@ -31,7 +31,7 @@ namespace AddItemsDynamically.Controllers
                 return NotFound();
             }
 
-            var order = await _context.Order
+            var order = await _context.Order.Include(t => t.Items)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (order == null)
             {
@@ -133,7 +133,7 @@ namespace AddItemsDynamically.Controllers
                 return NotFound();
             }
 
-            var order = await _context.Order
+            var order = await _context.Order.Include(t => t.Items)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (order == null)
             {
@@ -148,7 +148,7 @@ namespace AddItemsDynamically.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var order = await _context.Order.FindAsync(id);
+            var order = await _context.Order.Include(t => t.Items).FirstOrDefaultAsync(t=>t.Id == id);
             _context.Order.Remove(order);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

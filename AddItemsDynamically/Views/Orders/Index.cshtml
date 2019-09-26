@@ -17,6 +17,9 @@
                 @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.NumberOfItems)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.IsUrgent)
             </th>
             <th>
@@ -30,6 +33,9 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberOfItems)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.IsUrgent)

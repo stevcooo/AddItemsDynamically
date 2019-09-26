@@ -11,6 +11,12 @@ namespace AddItemsDynamically.Models
         public List<OrderItem> Items { get; set; }
         public DateTime Created { get; set; }
 
+        //This should be in ViewModel
+        public int NumberOfItems
+        {
+            get => Items.Count;
+        }
+
         public Order()
         {
             Items = new List<OrderItem>();

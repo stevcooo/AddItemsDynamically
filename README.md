@@ -33,7 +33,7 @@ In the AddOrderItem method we're returning PartialView where we render the list 
 
 When we have everything shown on the screen, now we should add the binding for the list in the create method of the controller and we are ready to use it (include Items in the binding list, because they are not included by default).
 
-![EditorTemplate](AddItemsDynamically/Media/CreateMthod.png)
+![EditorTemplate](AddItemsDynamically/Media/CreateMethod.png)
 
 Notice that we changed the model, we added a default constructor that will initialize the list. Also i've added a property that will give us the total number of items in the list, usualy this logic should be in ViewModel, but for the sake of simplicity i put it in the model.
 

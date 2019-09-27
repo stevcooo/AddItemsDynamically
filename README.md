@@ -5,13 +5,11 @@ In this example, I can show you how I solve this problem without refreshing the 
 
 ![animation](AddItemsDynamically/Media/AddItemsToList.gif)
 
-One of the first thins that you should do is to create an Editor for the Objects that are in the list, in this example the order items.
-This editor is simple copy-paste from its Edit.cshtml file, but remember to remove the 'form' element, otherwise, the submit button
-will not work. Name of the editor must be the same as the name of the model that you're editing, in this case, OrderItem and place it under Views/Shared/EditorTemplates. If you don't have the EditorTemplates folder under Shared, create it.
+One of the first thins that you should do is to create an Editor for the Objects that are in the list, in this example the order items. This editor is simple copy-paste from its `Edit.cshtml file`, but remember to remove the `<form asp-action="Edit">` element, otherwise, the submit button will not work. Name of the editor must be the same as the name of the model that you're editing, in this case, `OrderItem` and place it under `Views/Shared/EditorTemplates`. If you don't have the `EditorTemplates` folder under `Shared`, create it.
 
 ![EditorTemplate](AddItemsDynamically/Media/OrderItemTemplate.png)
 
-When we have the Editor we can use it in the Create.cshtml file to display the collection of the items. Usually, we place this part in a separate div element with specific id (in this case it's id="orderItemsContainer" so we can later change the content of this div with ajax.
+When we have the EditorTemplate we can use it in the `Create.cshtml` file to display the collection of the items. Usually, we place this part in a separate `div` element with specific `id` (in this case it's `id="orderItemsContainer"` so we can later change the content of this div with ajax.
 
 ![EditorTemplate](AddItemsDynamically/Media/UsingEditorInCreate.png)
 
@@ -19,15 +17,15 @@ After displaying the items, we should create a button that can be pressed to add
 
 ![EditorTemplate](AddItemsDynamically/Media/AddButonAndJavScript.png)
 
-To be able to serialize this form, we should also add an ID to the form in the create file.
+To be able to serialize this form, we should also add an `id` to the form in the create file.
 
 ![EditorTemplate](AddItemsDynamically/Media/FormIdAndSerialize.png)
 
-As you noted, we call a method AddOrderItem from Orders controller in the javascript ajax method, and this method we should also create in the controller and set up it's binding. This method in the controller is adding a new element to the list and rendering the whole list as a partial view which is later shown in the HTML. 
+As you noted, we call a method `AddOrderItem` from `Orders` controller in the javascript ajax method, and this method we should also create in the controller and set up it's binding. This method in the controller is adding a new element to the list and rendering the whole list as a partial view which is later shown in the HTML. 
 
 ![EditorTemplate](AddItemsDynamically/Media/AddOrderItemMethod.png)
 
-In the AddOrderItem method, we're returning PartialView where we render the list of the order items. Create a partial view in your Views/Order folder called OrderItems.cshtml. The Partial view is pretty much simple, it should only use the editor that we created previously.
+In the `AddOrderItem` method, we're returning PartialView where we render the list of the order items. Create a partial view in your Views/Order folder called `OrderItems.cshtml`. The Partial view is pretty much simple, it should only use the editor that we created previously.
 
 ![EditorTemplate](AddItemsDynamically/Media/PartialView.png)
 
